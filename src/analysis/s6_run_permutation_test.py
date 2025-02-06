@@ -1,7 +1,7 @@
 import numpy as np
 from matplotlib import pyplot as plt
-from analysis.Stage_3_Concat_all_trials import concat_all_trials
-from analysis.Stage_4_Create_surrogate_data import create_surrogate_data
+from s4_concat_all_trials import concat_all_trials
+from s5_create_surrogate_data import create_surrogate_data
 
 
 def permutation_test(processed_cond_1, processed_cond_2, observed_ratio, tasks_order, n_elec, n_freq_bands, n_permutations):

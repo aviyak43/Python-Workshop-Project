@@ -1,8 +1,8 @@
 import numpy as np
-from Stage_0_Get_main_variables import get_main_variables
-from Stage_1_Process_trials import process_trials_of_condition
-from Stage_2_Compute_mean_power import compute_mean_power
-from Stage_5_Run_permutation_test import permutation_test, check_significancy, plot_null_dist
+from s1_get_main_variables import get_main_variables
+from s2_process_trials import process_trials_of_condition
+from s3_compute_mean_power import compute_mean_power
+from s6_run_permutation_test import permutation_test, check_significancy, plot_null_dist
 
 
 def main_analysis(patient, ITERATIONS):

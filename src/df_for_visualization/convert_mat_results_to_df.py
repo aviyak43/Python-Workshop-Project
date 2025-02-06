@@ -1,7 +1,6 @@
 import pandas as pd
 from scipy.io import loadmat
 import os
-import argparse
 
 
 def get_patients_list(directory):
@@ -42,7 +41,7 @@ def create_dataframes(res_directory, save_directory):
     '''
     The function creates 6 dataframes, one for each frequency band.
     Each df contains all patients results of analysis. 
-    Excluded are 3 patients that were excluded as well from the original analysis done by Moataz
+    Excluded are 3 patients that were excluded as well from the original analysis
     ['2017_08', '2018_03', '2019_01']
     '''
     all_electrodes_info = pd.read_csv(f'{save_directory}/all_elec_info.csv')
@@ -91,22 +90,9 @@ def save_df_to_csv(dataframes, save_directory):
         print(f'Saved DataFrame for Band {i}-{bands_names[i]} Results')
 
 
-def main(res_dir, save_dir):
+def convert_mat_results_to_df(res_dir, save_dir):
+    '''The function converts results from mat files into 6 dataframes (one for each frequency band) and saves them to csv files'''
     print(f"Processing files in: {res_dir}")
     print(f"Saving results to: {save_dir}")
     bands_dataframes = create_dataframes(res_dir, save_dir)
     save_df_to_csv(bands_dataframes, save_dir)
-
-if __name__ == "__main__":
-    # Create the argument parser
-    parser = argparse.ArgumentParser(description="Process and save band dataframes.")
-
-    # Add arguments
-    parser.add_argument("--res_dir", type=str, default="results", help="Directory containing results.")
-    parser.add_argument("--save_dir", type=str, default="bands_results_df", help="Directory to save the dataframes.")
-
-    # Parse arguments
-    args = parser.parse_args()
-
-    # Call the main function with parsed arguments
-    main(args.res_dir, args.save_dir)

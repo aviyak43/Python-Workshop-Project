@@ -1,8 +1,8 @@
-import analysis.Stage_1_Process_trials as s1
-import analysis.Stage_2_Compute_mean_power as s2
-import analysis.Stage_3_Concat_all_trials as s3
-import analysis.Stage_4_Create_surrogate_data as s4
-import analysis.Stage_5_Run_permutation_test as s5
+import src.analysis.s2_process_trials as s1
+import src.analysis.s3_compute_mean_power as s2
+import src.analysis.s4_concat_all_trials as s3
+import src.analysis.s5_create_surrogate_data as s4
+import src.analysis.s6_run_permutation_test as s5
 import numpy as np
 
 
