@@ -14,8 +14,38 @@ Unfortunately, due to medical confidentiality, original raw ECOG data can not be
 ## Project Documentation
 
 ### Project Structure
-_**Add when we finish using this command in powershell:**_
-tree C:\Users\USER\Documents\Python-Workshop-Project /f
+```bash
+Python-Workshop-Project
+│   .gitignore
+│   Python Workshop - Final Project Report.pdf
+│   README.md
+│
+├───src
+│   │   main.py
+│   │   __init__.py
+│   │
+│   ├───analysis
+│   │      run_for_all_patients.py
+│   │      s1_get_main_variables.py
+│   │      s2_process_trials.py
+│   │      s3_compute_mean_power.py
+│   │      s4_concat_all_trials.py
+│   │      s5_create_surrogate_data.py
+│   │      s6_run_permutation_test.py
+│   │      s7_main_analysis.py
+│   │      __init__.py
+│   │ 
+│   │
+│   ├───df_for_visualization
+│   │       convert_mat_results_to_df.py
+│   │
+│   ├───visualization
+│           power_modulations_hg_lg_beta_alpha_theta_delta.ipynb
+│           power_modulations_within_and_outside_fpn.ipynb
+│   
+└───tests
+        tests_for_all_functions.py
+```
 
 ### Workflow / Pipeline
 #### 1. Data Preprocessing (Previously Done)
