@@ -14,7 +14,7 @@ Unfortunately, due to medical confidentiality, original raw ECOG data can not be
 ## Project Documentation
 
 ### Project Structure
-_**Add when we finish using this command in powershell:**_\
+_**Add when we finish using this command in powershell:**_
 tree C:\Users\USER\Documents\Python-Workshop-Project /f
 
 ### Workflow / Pipeline
