@@ -1,0 +1,69 @@
+[build-system]
+requires = ["setuptools>=68", "setuptools_scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ECOG-project-analysis"
+requires-python = ">=3.3"
+version = "1.0.0"
+description = "Pipeline replication and implementation"
+authors = [
+    { name = "Vladlena Samusev", email = "samysevavladlena@gmail.com" },
+    { name = "Aviya Keisar", email = "Aviyak43@gmail.com" }
+]
+dependencies = [
+    "numpy==1.21.0",
+    "pandas==1.3.0",
+    "scipy==1.7.0",
+    "matplotlib==3.4.2",
+    "seaborn==0.11.1"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=6.2.5",
+    "pytest-cov>=2.12.1",
+    "mypy",
+    "ruff",
+    "coverage[toml]==5.5",
+    "pytest-html==3.1.1",
+    "sphinx",
+    "sphinx_rtd_theme",
+]
+
+[tool.ruff]
+line-length = 120
+src = ["src"]
+extend-exclude = [
+    "setup.py",
+]
+target-version = "py37"
+lint.select = ["ALL"]
+lint.ignore = [
+    "COM812",
+    "ISC001",
+    "ANN101",
+    "PT001",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**" = [
+    "S101", # Use of `assert` detected
+    "D103", # Missing docstring in public function
+]
+"docs/**" = [
+    "INP001", # Requires __init__.py but docs folder is not a package.
+]
+
+[tool.mypy]
+disallow_untyped_defs = true
+warn_unused_ignores = true
+ignore_missing_imports = true
+exclude = [
+    "venv.*/",
+    "build/",
+    "dist/",
+]
+
+[project.urls]
+"Repository" = "https://github.com/aviyak43/Replicating-ECOG-Study-HG-Activity"
