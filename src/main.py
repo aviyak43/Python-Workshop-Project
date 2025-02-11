@@ -1,5 +1,5 @@
 from analysis.run_for_all_patients import run_analysis_for_all_patients
-from df_for_visualization import convert_mat_results_to_df
+from df_for_visualization.convert_mat_results_to_df import convert_mat_results_to_df
 from config import ITERATIONS, RES_DIR, SAVE_DIR
 from src.logger import logger
 
