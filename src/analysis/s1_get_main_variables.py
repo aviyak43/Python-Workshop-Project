@@ -19,7 +19,7 @@ def get_main_variables(patient):
     Output: dictionary
     '''
 
-    mat_file_path = '/mnt/jane_data/Intraop-Cam/elecphys_data/' + patient + \
+    mat_file_path = '/data/Intraop-Cam/elecphys_data/' + patient + \
         '/matlab_data/all_data_notch50_79_only_reref_bipolar_' + patient + '.mat'
     data = load_mat_file(mat_file_path)  # dictionary
     # Choose the required variable

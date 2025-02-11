@@ -9,7 +9,7 @@ def run_analysis_for_all_patients(directory, iterations):
     start_time = time.time()
 
     # Get all patients' IDs into a list (for a loop)
-    base_data_dir = '/mnt/jane_data/Intraop-Cam/elecphys_data/'
+    base_data_dir = '/data/Intraop-Cam/elecphys_data/'
     patients = os.listdir(base_data_dir)
     patients = [pat for pat in patients if not pat.endswith('.mat')]
     logger.info("Starting analysis for all patients...")
