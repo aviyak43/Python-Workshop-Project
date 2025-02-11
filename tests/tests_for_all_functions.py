@@ -1,3 +1,4 @@
+from src.logger import logger
 import src.analysis.s2_process_trials as s1
 import src.analysis.s3_compute_mean_power as s2
 import src.analysis.s4_concat_all_trials as s3
@@ -45,36 +46,36 @@ def create_toy_input():
 
 
 def test_trim_edges(example_list_1):
-    print("test_trim_edges:")
-    print(f'trial shape before trimming: \n{example_list_1[0].shape}')
+    logger.info("Testing trim_edges")
+    logger.debug(f'Trial shape before trimming: {example_list_1[0].shape}')
     res = s1.trim_edges(example_list_1[0], 1, 1, 1)
-    print(f'\ntrial shape after trimming 1 sample from both edges:\n{res.shape}\n')
+    logger.debug(f'Trial shape after trimming  1 sample from both edges: {res.shape}')
 
 
 def test_process_trials_of_condition(example_list_1):
-    print("test_process_trials_of_condition:")
+    logger.info("Testing process_trials_of_condition")
     res = s1.process_trials_of_condition(example_list_1, 1, 1, 1)
-    print(f'trial1 shape after processsing: \n{res[0].shape}\n')
+    logger.debug(f'Trial1 shape after processing: {res[0].shape}')
 
 
 '''Stage 2: Compute mean power ratio'''
 
 
 def test_compute_mean_power(example_list_1):
-    print("test_compute_mean_power:")
+    logger.info("Testing compute_mean_power")
     res = s2.compute_mean_power(example_list_1)
-    print(f'shape of mean power of cond1:\n{res.shape}\n')
+    logger.debug(f'Shape of mean power of cond1: {res.shape}')
 
 
 '''Stage 3: concatenate all trials in the right order'''
 
 
 def test_concat_all_trials(example_list_1, example_list_2):
-    print("test_concat_all_trials:")
+    logger.info("Testing concat_all_trials")
     concatenated, trials_sizes = s3.concat_all_trials(example_list_1, example_list_2,
                                                       tasks_order=['alt', 'countF', 'alt', 'countF', 'countF'])
-    print(f'total trials: {len(trials_sizes)}')
-    print(f'shape of concatenated trials: {concatenated.shape}\n')
+    logger.debug(f'Total trials: {len(trials_sizes)}')
+    logger.debug(f'Shape of concatenated trials: {concatenated.shape}')
     return concatenated, trials_sizes
 
 
@@ -82,34 +83,34 @@ def test_concat_all_trials(example_list_1, example_list_2):
 
 
 def test_rotate_data_randomly(concatenated):
-    print("test_rotate_data_randomly:")
+    logger.info("Testing rotate_data_randomly")
     rotated_data = s4.rotate_data_randomly(concatenated)
-    print(f'shape of rotated_data: {rotated_data.shape}')
-    print(f'rotated data:\n {rotated_data[0]}\n')
+    logger.debug(f'Shape of rotated_data: {rotated_data.shape}')
+    logger.debug(f'Rotated_data: {rotated_data[0]}')
     return rotated_data
 
 
 def test_split_back_to_original_conditions(rotated_data, trials_sizes):
-    print("test_split_back_to_original_conditions:")
+    logger.info("Testing split_back_to_original_conditions")
     l1, l2 = s4.split_back_to_original_conditions(rotated_data, trials_sizes,
                                                   tasks_order=['alt', 'countF', 'alt', 'countF', 'countF'])
-    print(f'new cond1 shape:{l1.shape}')
-    print(f'new cond2 shape: {l2.shape}')
+    logger.debug(f'New cond1 shape: {l1.shape}')
+    logger.debug(f'New cond2 shape: {l2.shape}')
 
 
 def test_create_surrogate_data(concatenated, trials_sizes):
-    print("test_create_surrogate_data:")
+    logger.info("Testing create_surrogate_data")
     l1, l2 = s4.create_surrogate_data(concatenated, trials_sizes,
                                       tasks_order=['alt', 'countF', 'alt', 'countF', 'countF'])
-    print(f'new cond1 shape:{l1.shape}')
-    print(f'new cond2 shape: {l2.shape}\n')
+    logger.debug(f'New cond1 shape: {l1.shape}')
+    logger.debug(f'New cond2 shape: {l2.shape}')
 
 
 '''Stage 5: Run permutation test'''
 
 
 def test_permutation_test(example_list_1, example_list_2):
-    print("test_permutation_test:")
+    logger.info("Testing permutation_test")
     mean_power_cond1 = s2.compute_mean_power(example_list_1)
     mean_power_cond2 = s2.compute_mean_power(example_list_2)
     mean_power_ratio = mean_power_cond2 / mean_power_cond1
@@ -117,17 +118,17 @@ def test_permutation_test(example_list_1, example_list_2):
                                                                   tasks_order=['alt', 'countF',
                                                                                'alt', 'countF', 'countF'],
                                                                   n_elec=2, n_freq_bands=3, n_permutations=1000)
-    print(f'mean_power_ratio results:\n {mean_power_ratio}')
-    print(f'p_values results:\n {p_values}')
-    print(f'null distribution shape: {mean_power_ratio_distribution.shape}')
+    logger.debug(f'Mean power ratio results:\n {mean_power_ratio}')
+    logger.debug(f'P-values results:\n {p_values}')
+    logger.debug(f'Null distribution shape: {mean_power_ratio_distribution.shape}')
 
 
 if __name__ == "__main__":
     example_object_1, example_object_2 = create_toy_input()
-    print(f'trials in cond1:{example_object_1.shape}')
-    print(f'shape of each trial: {example_object_1[0].shape} (elec X samples X bands)')
-    print(f'trials in cond2:{example_object_2.shape}')
-    print(f'shape of each trial: {example_object_2[0].shape} (elec X samples X bands)')
+    logger.info(f'Trials in cond1: {example_object_1.shape}')
+    logger.info(f'Shape of each trial: {example_object_1[0].shape} (elec X samples X bands)')
+    logger.info(f'Trials in cond2: {example_object_2.shape}')
+    logger.info(f'Shape of each trial: {example_object_2[0].shape} (elec X samples X bands)')
 
     test_trim_edges(example_object_1)
     test_process_trials_of_condition(example_object_1)

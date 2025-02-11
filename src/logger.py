@@ -1,0 +1,10 @@
+import logging
+
+# configure the root logger
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s - %(filename)s - %(levelname)s - %(message)s",
+    handlers=[logging.FileHandler("project.log"), logging.StreamHandler()],
+)
+# Get the root logger
+logger = logging.getLogger()
