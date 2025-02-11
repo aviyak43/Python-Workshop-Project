@@ -21,6 +21,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
+    "ipykernel",
     "pytest>=6.2.5",
     "pytest-cov>=2.12.1",
     "mypy",
