@@ -24,6 +24,7 @@ Replicating-ECOG-Study-HG-Activity
 │
 ├───src
 │   │   config.py
+│   │   logger.py
 │   │   main.py
 │   │   __init__.py
 │   │
