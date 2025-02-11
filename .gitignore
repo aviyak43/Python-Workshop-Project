@@ -2,5 +2,7 @@
 *.csv
 *.pyc
 *.npy
+*.log
 __pycache__
 venv
+ECOG_project_analysis.egg-info
