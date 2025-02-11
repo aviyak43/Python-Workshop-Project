@@ -1,7 +1,9 @@
 from scipy.io import savemat
-from s7_main_analysis import main_analysis
 import os
 import time
+from src.logger import logger
+from src.analysis.s7_main_analysis import main_analysis
+
 
 def run_analysis_for_all_patients(directory, iterations):
     start_time = time.time()
@@ -10,14 +12,14 @@ def run_analysis_for_all_patients(directory, iterations):
     base_data_dir = '/mnt/jane_data/Intraop-Cam/elecphys_data/'
     patients = os.listdir(base_data_dir)
     patients = [pat for pat in patients if not pat.endswith('.mat')]
-
+    logger.info("Starting analysis for all patients...")
 
     '''
     This loop performs the main analysis for all patients and saves the results in the dedicated folder
     '''
     # Go through all patients' data
     for patient in patients:
-        print(f'patient: {patient}')
+        logger.info(f'Starting analysis for patient: {patient}')
 
         # Ensure the directory for saving the results exists, if not, create it
         save_directory = f'{directory}/{patient}'
@@ -35,7 +37,7 @@ def run_analysis_for_all_patients(directory, iterations):
         p_values = results_d['p_values']
         permutation_test_mean_power_ratio_distribution = results_d[
             'permutation_test_mean_power_ratio_distribution']
-        print(p_values)
+        logger.info(f"Results for patient {patient} - p-values: {p_values}")
 
         # Save results in dedicated folder
         savemat(f'{save_directory}/results.mat',
@@ -47,5 +49,4 @@ def run_analysis_for_all_patients(directory, iterations):
                     'rest_mean_power': rest_mean_power},
                 format='5')
 
-
-    print("Process finished --- %s seconds ---" % (time.time() - start_time))
+    logger.info(f"Process finished --- {time.time() - start_time} seconds")

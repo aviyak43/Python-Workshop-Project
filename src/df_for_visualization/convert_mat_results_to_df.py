@@ -1,6 +1,7 @@
 import pandas as pd
 from scipy.io import loadmat
 import os
+from src.logger import logger
 
 
 def get_patients_list(directory):
@@ -87,12 +88,12 @@ def save_df_to_csv(dataframes, save_directory):
     for i, df in enumerate(dataframes):
         file_path = os.path.join(save_directory, f'Band{i}-{bands_names[i]} Results.csv')
         df.to_csv(file_path, index=False)
-        print(f'Saved DataFrame for Band {i}-{bands_names[i]} Results')
+        logger.info(f"Saved DataFrame for Band {i}-{bands_names[i]} Results to {file_path}")
 
 
 def convert_mat_results_to_df(res_dir, save_dir):
     '''The function converts results from mat files into 6 dataframes (one for each frequency band) and saves them to csv files'''
-    print(f"Processing files in: {res_dir}")
-    print(f"Saving results to: {save_dir}")
+    logger.info(f"Starting conversion of MAT results in {res_dir} and saving to {save_dir}")
     bands_dataframes = create_dataframes(res_dir, save_dir)
     save_df_to_csv(bands_dataframes, save_dir)
+    logger.info("MAT file results conversion and saving completed.")
